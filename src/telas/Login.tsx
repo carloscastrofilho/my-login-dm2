@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
-import { signInWithEmailAndPassword } from "firebase/auth"
+//import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from '../config/firebase';
 
  
@@ -13,34 +13,34 @@ const Login = ({navigation}) => {
 
   const onLoginClick = () => {
     //
-    signInWithEmailAndPassword( auth, nomeUsuario,  senha)
-    .then( (userCredential)=> {
-        const user =  userCredential.user;
-        // console.log(user)        //
-        // navigation.navigate('Home',
-        //   { screen: 'Home',
-        //     params: { user: {user}} }, )
-        navigation.push('Login') ;
-    } )
-    .catch( (error)=> {
-      const errocode = error.code ;
-      const errormsg = error.message ;
-      // tratamento das mensagens de erro pelo error.code      
-      switch (errocode) {
-        case 'auth/invalid-credential':
-          alert( "Usuario ou Senha Invalida !") ; 
-          return null
-        case 'auth/missing-password':
-          alert( "Usuario ou Senha em Branco !") ; 
-          return null
-        case 'auth/invalid-email':
-          alert( "Usuario ou Senha em Branco !") ; 
-          return null
-        default:
-          alert( "Ops, Desculpa algo aconteceu,\n tente novamente!") ; 
-      }      
-    } );    
-  }
+  //   signInWithEmailAndPassword( auth, nomeUsuario,  senha)
+  //   .then( (userCredential)=> {
+  //       const user =  userCredential.user;
+  //       // console.log(user)        //
+  //       // navigation.navigate('Home',
+  //       //   { screen: 'Home',
+  //       //     params: { user: {user}} }, )
+  //       navigation.push('Login') ;
+  //   } )
+  //   .catch( (error)=> {
+  //     const errocode = error.code ;
+  //     const errormsg = error.message ;
+  //     // tratamento das mensagens de erro pelo error.code      
+  //     switch (errocode) {
+  //       case 'auth/invalid-credential':
+  //         alert( "Usuario ou Senha Invalida !") ; 
+  //         return null
+  //       case 'auth/missing-password':
+  //         alert( "Usuario ou Senha em Branco !") ; 
+  //         return null
+  //       case 'auth/invalid-email':
+  //         alert( "Usuario ou Senha em Branco !") ; 
+  //         return null
+  //       default:
+  //         alert( "Ops, Desculpa algo aconteceu,\n tente novamente!") ; 
+  //     }      
+  //   } );    
+ }
 
   const onPressRegister = () => {
     navigation.navigate('Registrar')
@@ -64,7 +64,7 @@ const Login = ({navigation}) => {
         secureTextEntry={true}
       />
       
-      <View sytle={styles.textocontainer}>
+      <View style={styles.textocontainer}>
           <Text>Não possui conta?
              <Text style={styles.textoCadastro} onPress={onPressRegister}>   Faça o cadastro
              </Text>

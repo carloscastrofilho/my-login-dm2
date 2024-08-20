@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import {createUserWithEmailAndPassword } from "firebase/auth";
+//import {createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../config/firebase';
 
 const PlaceholderImage = require('../component/image/usuario.png');
@@ -24,31 +24,31 @@ const Registrar = ({navigation}) => {
        return
     }
     //
-    createUserWithEmailAndPassword( auth, email,  senha, telefone)
-    .then( (userCredential)=> {
-        const user =  userCredential.user;
-        //console.log(user)
-        //
-        navigation.navigate('Login')
-    } )
-    .catch( (error)=> {
-      const errocode = error.code ;
-      const errormsg = error.message ;
-      // console.log( errocode );
-      // console.log( errormsg );
-      switch (errocode) {
-        case 'auth/email-already-in-use':
-          alert( "Email já esta em utilização !") ; 
-          return null
-        case 'auth/invalid-email':
-          alert( "Email invalido!") ; 
-          return null 
-        default:
-          alert( "falha ao registrar o usuario !") ; 
-          return null  
-      }    
-      navigation.navigate('Login')
-    } );
+    // createUserWithEmailAndPassword( auth, email,  senha, telefone)
+    // .then( (userCredential)=> {
+    //     const user =  userCredential.user;
+    //     //console.log(user)
+    //     //
+    //     navigation.navigate('Login')
+    // } )
+    // .catch( (error)=> {
+    //   const errocode = error.code ;
+    //   const errormsg = error.message ;
+    //   // console.log( errocode );
+    //   // console.log( errormsg );
+    //   switch (errocode) {
+    //     case 'auth/email-already-in-use':
+    //       alert( "Email já esta em utilização !") ; 
+    //       return null
+    //     case 'auth/invalid-email':
+    //       alert( "Email invalido!") ; 
+    //       return null 
+    //     default:
+    //       alert( "falha ao registrar o usuario !") ; 
+    //       return null  
+    //   }    
+    //   navigation.navigate('Login')
+    // } );
      
   }
 
@@ -93,7 +93,7 @@ const Registrar = ({navigation}) => {
         secureTextEntry={true}
       />
 
-      <View sytle={styles.textocontainer}>
+      <View style={styles.textocontainer}>
           <Text>Já possui conta?
              <Text style={styles.textoCadastro} onPress={onPressRegister}>   Faça o Login
              </Text>
@@ -149,6 +149,15 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  textocontainer:{
+    backgroundColor: 'red',
+  },
+  textoCadastro:{
+    color: 'red',
+    fontSize: 16,
+    fontWeight: 'bold',
+    padding: 10,
   },
 });
 

@@ -1,20 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import StackNavigator from './src/component/StackerNavigator';
 
-export default function App() {
+type UserProps = {
+  name: string;
+  email: string;
+  logo: string;
+  token: string;  
+}
+
+
+export default function App(usuario:UserProps) {
   return (
-    <View style={styles.container}>
-      <Text> ola teste  </Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+        <StackNavigator user={usuario} />
+        <StatusBar style="auto" />
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
