@@ -1,26 +1,20 @@
 // StackNavigator.js
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationContainer} from '@react-navigation/native';
 import Login from "../telas/Login";
 import Registrar from "../telas/Registrar";
-
-type UserProps = {
-  name: string;
-  email: string;
-  logo: string;
-  token: string;  
-}
+import Home from '../telas/Home';
 
 //  configurar  - <Stack.Screen name="Home" component={Home}/>
 const Stack = createNativeStackNavigator();
 
-export default function StackNavigator( {user:UserProps}) {
+export default function StackNavigator() {
   
   return ( 
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Registrar" component={Registrar}/>     
+      <Stack.Screen name="Registrar" component={Registrar}/>
+      <Stack.Screen name="Home" component={Home}/>   
     </Stack.Navigator>    
   )
 }

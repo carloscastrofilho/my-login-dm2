@@ -8,20 +8,33 @@ import ButtonNew from './ButtonNew';
 // telas disponivel na rota
 import Registrar from "../telas/Registrar";
 import Home from "../telas/Home";
-import FichaUsuario from '../telas/FichaUsuario';
+// import FichaUsuario from '../telas/FichaUsuario';
 //
 import { auth } from "../config/firebase";
-import { signOut } from "firebase/auth";
+// import { signOut } from "firebase/auth";
+
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 // tab menu
 const Tab = createBottomTabNavigator();
 
-const SairPrograma = () => {
-    signOut(auth);
-}
+// const SairPrograma = (navigation:NavigationProp<ParamListBase>) => {
+//     // signOut(auth);
+//     navigation.navigate('Login')
+// }
 
-export default function TabNavigator({user}) {
-    //console.log(user);
+interface SairProgramaProps {
+    navigation: NavigationProp<ParamListBase>;
+  }
+  
+const SairPrograma: React.FC<SairProgramaProps> = ({ navigation }) => {
+    // Aqui você pode chamar o signOut se estiver descomentado
+    // signOut(auth);    
+    // Navega para a tela de login
+    return null; // Como não queremos renderizar nada, retorna null
+  };
+
+export default function TabNavigator() {
     return (
         <Tab.Navigator screenOptions={{
             tabBarStyle: {
@@ -30,20 +43,19 @@ export default function TabNavigator({user}) {
             },
             tabBarActiveTintColor: '#fff',
             // tabBarActiveBackgroundColor: '#fff',
-            paddingBottom: 5,
-            paddingTop:  5,
+           
         }
             
          }>
-            <Tab.Screen name="Home" component={Home}
-                initialParams={{ user }} 
+            <Tab.Screen name="Home" 
+                component={Home}
                 options={{ tabBarLabel: 'início',
                          tabBarIcon: ({ color, size }) => (
                           <Entypo name="home" color={color} size={size} />
                          )
                     }}/>
             <Tab.Screen name="Registro" component={Registrar}/>
-            <Tab.Screen name="ficha" component={FichaUsuario}/>
+            {/* <Tab.Screen name="ficha" component={FichaUsuario}/> */}
             <Tab.Screen name="Sair" component={SairPrograma}
                 options={{ tabBarLabel: 'início',
                     tabBarIcon: ({ color, size }) => (
@@ -52,72 +64,3 @@ export default function TabNavigator({user}) {
         </Tab.Navigator>
       );
   };
-
-  // <Tab.Navigator       
-  //       screenOptions={{
-  //         headerShown: false ,
-  //         tabBarStyle: {
-  //           backgroundColor: '#121212',
-  //           borderTopColor: 'transparent'
-  //         },
-  //         tabBarActiveTintColor: '#FFF',
-  //         paddingBottom: 5,
-  //         paddingTop: 5,
-  //       }}>
-  //       <Tab.Screen
-  //         name="Inicio"
-  //         component={Home}
-  //         options={{
-  //           tabBarLabel: 'Inicio',
-  //           tabBarIcon: ({ color, size }) => (
-  //             <Entypo name="home" color={color} size={size} />
-  //           )
-  //         }}
-  //       />
-  
-  //       <Tab.Screen
-  //         name="Search"
-  //         component={FichaUsuario}
-  //         options={{
-  //           tabBarLabel: 'Usuario',
-  //           tabBarIcon: ({ color, size }) => (
-  //             <Feather name="search" color={color} size={size} />
-  //           )
-  //         }}
-  //       />
-  
-  //       <Tab.Screen
-  //         name="Novo"
-  //         component={FichaUsuario}
-  //         options={{
-  //           tabBarLabel: '',
-  //           tabBarIcon: ({ focused, color, size }) => (
-  //             <ButtonNew size={size} focused={focused} />
-  //           )
-  //         }}
-  //       />
-  
-  //       <Tab.Screen
-  //         name="Registrar"
-  //         component={Registrar}
-  //         options={{
-  //           tabBarLabel: 'Registro',
-  //           tabBarIcon: ({ color, size }) => (
-  //             <Entypo name="notification" color={color} size={size} />
-  //           )
-  //         }}
-  //       />
-  
-  //       <Tab.Screen
-  //         name="Perfil"
-  //         component={FichaUsuario}
-  //         options={{
-  //           tabBarLabel: 'Perfil',
-  //           tabBarIcon: ({ color, size }) => (
-  //             <Feather name="user" color={color} size={size} />
-  //           )
-  //         }}
-  //       />
-  
-  // </Tab.Navigator>
-    

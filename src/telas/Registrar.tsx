@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 //import {createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../config/firebase';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
+interface NavigationProps {
+  navigation:NavigationProp<ParamListBase>;
+}
 const PlaceholderImage = require('../component/image/usuario.png');
 
-const Registrar = ({navigation}) => {
+const Registrar = ({navigation}:NavigationProps) => {
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
@@ -47,13 +51,13 @@ const Registrar = ({navigation}) => {
     //       alert( "falha ao registrar o usuario !") ; 
     //       return null  
     //   }    
-    //   navigation.navigate('Login')
+    navigation.navigate('Home')
     // } );
      
   }
 
   const onPressRegister = () => {
-    navigation.navigate('Login');
+    navigation.navigate('Home');
   }
 
   return (

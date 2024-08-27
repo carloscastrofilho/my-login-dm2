@@ -1,22 +1,36 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+
+interface RouteProps {
+  displayName : string;
+  email: string;
+  emailVerified: string;
+  phoneNumber : string;
+  photoURL : string;
+  uid: string;
+}
+interface NavigationProps {
+  navigation:NavigationProp<ParamListBase>;
+}
 
 const PlaceholderImage = require("../component/image/soldado.png");
 
-const Home = ({ navigation, route }) => {
+const Home = ({ navigation }:NavigationProps) => {
   // const userLogado = route.params.user ;
   //console.log(route.params)
-
-  const nome = route.params?.user.displayName ;
-  const email = route.params?.user.email ;
-  const emailVerified = route.params?.user.emailVerified ;
   
-  const phoneNumber = route.params?.user.phoneNumber ;
-  const photoURL = route.params?.user.photoURL ;
-  const uid = route.params?.user.uid ;
+
+  // const nome = route.displayName ;
+  // const email = route.email ;
+  // const emailVerified = route.emailVerified ;
+  
+  // const phoneNumber = route.phoneNumber ;
+  // const photoURL = route.photoURL ;
+  // const uid = route.uid ;
   
   const onLoginClick = () => {
-    navigation.navigate("Ficha");
+    navigation.navigate("Login");
   };
 
   return (
@@ -27,12 +41,12 @@ const Home = ({ navigation, route }) => {
       </View>
 
       <View>
-          <Text> apelido: {nome}</Text>
+          {/* <Text> apelido: {nome}</Text>
           <Text> email:  {email}</Text>          
           <Text> telefone: {phoneNumber}</Text>
           <Text> foto url: {photoURL}</Text>
           <Text> uuid: {uid}</Text>
-          <Text> email verificado: {emailVerified}</Text>
+          <Text> email verificado: {emailVerified}</Text> */}
         <View>
           <TouchableOpacity style={styles.botao} onPress={onLoginClick}>
             <Text style={styles.textoBotao}>Ficha Usuario</Text>

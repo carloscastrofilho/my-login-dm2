@@ -10,10 +10,10 @@ type UserProps = {
 }
 
 
-export default function App(usuario:UserProps) {
+export default function App() {
   return (
     <NavigationContainer>
-        <StackNavigator user={usuario} />
+        <StackNavigator />
         <StatusBar style="auto" />
     </NavigationContainer>
   );
