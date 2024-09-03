@@ -1,9 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
 // import { signInWithEmailAndPassword } from "firebase/auth"
 // import { auth } from '../config/firebase';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import AuthContext from '../context/auth';
 interface NavigationProps {
   navigation:NavigationProp<ParamListBase>;
 }
@@ -13,6 +14,11 @@ const PlaceholderImage = require('../component/image/usuario.png');
 const Login = ({ navigation }: NavigationProps ) => {
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [senha, setSenha] = useState('');
+
+  const { signed , SignIn, user} = useContext(AuthContext); 
+
+  console.log(signed)
+  console.log(user)
 
   const onLoginClick = () => {
     //
@@ -43,7 +49,11 @@ const Login = ({ navigation }: NavigationProps ) => {
   //         alert( "Ops, Desculpa algo aconteceu,\n tente novamente!") ; 
   //     }      
   //   } );    
-  navigation.navigate('Registrar')
+  console.log(" ir para home")
+  SignIn();
+  // navigation.navigate('Registrar')
+
+
  }
 
   const onPressRegister = () => {
@@ -53,7 +63,7 @@ const Login = ({ navigation }: NavigationProps ) => {
   return (
     <View style={styles.container}>
             <Image source={PlaceholderImage} style={styles.image} />
-            <Text style={styles.titulo}>Login Aula 28/05/24</Text>
+            <Text style={styles.titulo}>Login Aula 03/09/24</Text>
       <TextInput
         style={styles.input}
         placeholder="Nome de Usuário"
