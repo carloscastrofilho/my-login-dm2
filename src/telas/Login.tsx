@@ -52,8 +52,11 @@ const Login = ({ navigation }: NavigationProps ) => {
 
   return (
     <View style={styles.container}>
-            <Image source={PlaceholderImage} style={styles.image} />
-            <Text style={styles.titulo}>Login Aula 28/05/24</Text>
+      
+      <Image source={PlaceholderImage} style={styles.image} />
+      <Text style={styles.titulo}>Login</Text>
+      <Text style={styles.subTitulo}>Aula 03-09 Routes</Text>
+      
       <TextInput
         style={styles.input}
         placeholder="Nome de Usuário"
@@ -68,11 +71,11 @@ const Login = ({ navigation }: NavigationProps ) => {
         secureTextEntry={true}
       />
       
-      <View style={styles.textocontainer}>
-          <Text>Não possui conta?
+      <View style={styles.textoContainer}>
+          <Text>Não possui conta? {'  '}
              <Text style={styles.textoCadastro} 
               onPress={onPressRegister}>
-                Faça o cadastro
+                Faça o cadastro!
              </Text>
           </Text> 
       </View>
@@ -106,6 +109,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  subTitulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: 'red'
+  },
   input: {
     width: '80%',
     height: 60,
@@ -129,18 +138,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  containerTexto:{
-    width: '100%',
+
+  textoContainer:{
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,  
   },
   textoCadastro:{
     color: 'red',
     fontSize: 16,
     fontWeight: 'bold',
-    padding: 10,
   },
-  textocontainer:{
-    backgroundColor: 'red',
-  }
+  
 });
 
 export default Login;

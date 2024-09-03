@@ -16,7 +16,7 @@ const Registrar = ({navigation}:NavigationProps) => {
   const [senha, setSenha] = useState('');
   const [senha2, setSenha2] = useState('');
 
-  const onLoginClick = () => {
+  const onLoginClickRegistro = () => {
     // confere se a senha e iqual a senha de confirmação
     // console.log( '>>> ', (( senha.trim() === '') || ( senha2.trim() === '') ))
     if ( senha.trim() === '' ||  senha2.trim() === '' ) {
@@ -56,8 +56,8 @@ const Registrar = ({navigation}:NavigationProps) => {
      
   }
 
-  const onPressRegister = () => {
-    navigation.navigate('Home');
+  const onHandleClickLogin = () => {
+    navigation.navigate('Login');
   }
 
   return (
@@ -97,14 +97,14 @@ const Registrar = ({navigation}:NavigationProps) => {
         secureTextEntry={true}
       />
 
-      <View style={styles.textocontainer}>
-          <Text>Já possui conta?
-             <Text style={styles.textoCadastro} onPress={onPressRegister}>   Faça o Login
+      <View style={styles.textoContainer}>
+          <Text>Já possui conta? {"   "}
+             <Text style={styles.textoCadastro} onPress={onHandleClickLogin}>Volte a o Login
              </Text>
           </Text> 
       </View>
 
-      <TouchableOpacity style={styles.botao} onPress={onLoginClick}>
+      <TouchableOpacity style={styles.botao} onPress={onLoginClickRegistro}>
         <Text style={styles.textoBotao}>Registrar</Text>
       </TouchableOpacity>
     </View>
@@ -131,6 +131,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  subTitulo: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: 'red'
+  },
   input: {
     width: '80%',
     height: 60,
@@ -154,15 +160,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  textocontainer:{
-    backgroundColor: 'red',
+
+  textoContainer:{
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+ 
   },
   textoCadastro:{
     color: 'red',
     fontSize: 16,
     fontWeight: 'bold',
-    padding: 10,
   },
+  
 });
+
 
 export default Registrar;
