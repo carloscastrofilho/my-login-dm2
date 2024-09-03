@@ -1,9 +1,10 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
 // import { signInWithEmailAndPassword } from "firebase/auth"
 // import { auth } from '../config/firebase';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import AuthContext from '../contexts/auth';
 interface NavigationProps {
   navigation:NavigationProp<ParamListBase>;
 }
@@ -13,6 +14,8 @@ const PlaceholderImage = require('../component/image/usuario.png');
 const Login = ({ navigation }: NavigationProps ) => {
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [senha, setSenha] = useState('');
+  const signed =  useContext(AuthContext) ;
+  console.log(signed);
 
   const onLoginClick = () => {
     //
@@ -55,7 +58,7 @@ const Login = ({ navigation }: NavigationProps ) => {
       
       <Image source={PlaceholderImage} style={styles.image} />
       <Text style={styles.titulo}>Login</Text>
-      <Text style={styles.subTitulo}>Aula 03-09 Routes</Text>
+      <Text style={styles.subTitulo}>Aula 03-09 Context</Text>
       
       <TextInput
         style={styles.input}
