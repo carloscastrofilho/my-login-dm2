@@ -1,53 +1,35 @@
-// TabNavigator.js 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { Entypo, Feather,Ionicons } from '@expo/vector-icons';
-// import ButtonNew from '../component/ButtonNew';
 
 import AuthContext from '../context/auth';
 
-//<Ionicons name="exit" size={24} color="black" />
-// telas disponivel na rota
 import Registrar from "../telas/Registrar";
 import Home from "../telas/Home";
-// import FichaUsuario from '../telas/FichaUsuario';
-//
-// import { auth } from "../config/firebase";
-// import { signOut } from "firebase/auth";
 
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
-// tab menu
 const Tab = createBottomTabNavigator();
 
-// const SairPrograma = (navigation:NavigationProp<ParamListBase>) => {
-//     // signOut(auth);
-//     navigation.navigate('Login')
-// }
-
-interface SairProgramaProps {
-    navigation: NavigationProp<ParamListBase>;
-  }
-  
-const SairPrograma: React.FC<SairProgramaProps> = ({ navigation }) => {
-    const { SignOut} = useContext(AuthContext); 
-    SignOut();
-    // Aqui você pode chamar o signOut se estiver descomentado
-    // signOut(auth);    
-    // Navega para a tela de login
-    return null; // Como não queremos renderizar nada, retorna null
-  };
-
 export default function AuthRoutes() {
+    const { SignOut } = useContext(AuthContext);
+    // O componente Logout agora usa useEffect para chamar SignOut
+    const Logout = () => {
+        const { SignOut } = useContext(AuthContext);
+
+        useEffect(() => {
+            SignOut(); // Executa o logout apenas quando o componente é montado
+        }, []);
+
+        return null; // Não renderiza nada
+    };
     return (
         <Tab.Navigator screenOptions={{
             tabBarStyle: {
                 backgroundColor: '#000',
                 borderTopColor: "transparent",
             },
-            tabBarActiveTintColor: '#fff',
-            // tabBarActiveBackgroundColor: '#fff',
-           
+            tabBarActiveTintColor: '#fff'           
         }
             
          }>
@@ -59,8 +41,7 @@ export default function AuthRoutes() {
                          )
                     }}/>
             <Tab.Screen name="Registro" component={Registrar}/>
-            {/* <Tab.Screen name="ficha" component={FichaUsuario}/> */}
-            <Tab.Screen name="Sair" component={SairPrograma}
+            <Tab.Screen name="Sair" component={ Logout}
                 options={{ tabBarLabel: 'início',
                     tabBarIcon: ({ color, size }) => (
                     <Ionicons name="exit" color={color} size={size} /> )

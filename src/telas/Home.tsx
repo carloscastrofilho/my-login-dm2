@@ -18,10 +18,7 @@ interface NavigationProps {
 const PlaceholderImage = require("../component/image/soldado.png");
 
 const Home = ({ navigation }:NavigationProps) => {
-  const { signed , SignIn, user} = useContext(AuthContext); 
-
-  console.log(signed)
-  console.log(user)
+  const { signed , user} = useContext(AuthContext); 
 
   // const userLogado = route.params.user ;
   //console.log(route.params)

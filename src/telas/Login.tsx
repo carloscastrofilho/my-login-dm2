@@ -17,9 +17,6 @@ const Login = ({ navigation }: NavigationProps ) => {
 
   const { signed , SignIn, user} = useContext(AuthContext); 
 
-  console.log(signed)
-  console.log(user)
-
   const onLoginClick = () => {
     //
   //   signInWithEmailAndPassword( auth, nomeUsuario,  senha)
@@ -49,7 +46,7 @@ const Login = ({ navigation }: NavigationProps ) => {
   //         alert( "Ops, Desculpa algo aconteceu,\n tente novamente!") ; 
   //     }      
   //   } );    
-  console.log(" ir para home")
+  //console.log(" ir para home")
   SignIn();
   // navigation.navigate('Registrar')
 
