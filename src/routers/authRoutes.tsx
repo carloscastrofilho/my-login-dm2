@@ -1,13 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { Entypo, Feather,Ionicons } from '@expo/vector-icons';
-
 import AuthContext from '../context/auth';
-
 import Registrar from "../telas/Registrar";
 import Home from "../telas/Home";
-
-import { NavigationProp, ParamListBase } from '@react-navigation/native';
+//import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,7 +13,6 @@ export default function AuthRoutes() {
     // O componente Logout agora usa useEffect para chamar SignOut
     const Logout = () => {
         const { SignOut } = useContext(AuthContext);
-
         useEffect(() => {
             SignOut(); // Executa o logout apenas quando o componente é montado
         }, []);

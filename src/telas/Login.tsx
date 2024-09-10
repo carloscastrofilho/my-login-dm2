@@ -60,7 +60,7 @@ const Login = ({ navigation }: NavigationProps ) => {
   return (
     <View style={styles.container}>
             <Image source={PlaceholderImage} style={styles.image} />
-            <Text style={styles.titulo}>Login Aula 03/09/24</Text>
+            <Text style={styles.titulo}>Login Aula 10/09/24</Text>
       <TextInput
         style={styles.input}
         placeholder="Nome de Usuário"
