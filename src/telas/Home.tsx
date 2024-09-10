@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import AuthContext from '../context/auth';
 
 interface RouteProps {
   displayName : string;
@@ -17,6 +18,8 @@ interface NavigationProps {
 const PlaceholderImage = require("../component/image/soldado.png");
 
 const Home = ({ navigation }:NavigationProps) => {
+  const { signed , user} = useContext(AuthContext); 
+
   // const userLogado = route.params.user ;
   //console.log(route.params)
   

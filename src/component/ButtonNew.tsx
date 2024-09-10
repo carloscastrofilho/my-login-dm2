@@ -2,7 +2,12 @@ import React from "react";
 import { View, Text , StyleSheet} from 'react-native'
 import { Entypo, Feather } from '@expo/vector-icons'
 
-export default function ButtonNew({size, focused}){
+interface PropsButton {
+    size: number;
+    focused: boolean;
+}
+
+export default function ButtonNew({size, focused}:PropsButton){
     return (
         <View style={[styles.container, { backgroundColor: focused ? '#3eccf5' :'#6fdfff' }]}>
            <Entypo name="plus" color={focused? '#fff':'#f8f8f8'} size={size} />
