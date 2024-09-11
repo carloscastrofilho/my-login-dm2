@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 //import {createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../config/firebase';
+import { auth } from '../services/database/firebase';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 interface NavigationProps {

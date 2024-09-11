@@ -1,8 +1,5 @@
-import React, { Component, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
-// import { signInWithEmailAndPassword } from "firebase/auth"
-// import { auth } from '../config/firebase';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import AuthContext from '../context/auth';
 interface NavigationProps {
@@ -15,10 +12,10 @@ const Login = ({ navigation }: NavigationProps ) => {
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [senha, setSenha] = useState('');
 
-  const { signed , SignIn, user} = useContext(AuthContext); 
+  const { SignIn } = useContext(AuthContext); 
 
   const onLoginClick = () => {
-    //
+  //
   //   signInWithEmailAndPassword( auth, nomeUsuario,  senha)
   //   .then( (userCredential)=> {
   //       const user =  userCredential.user;
@@ -46,11 +43,9 @@ const Login = ({ navigation }: NavigationProps ) => {
   //         alert( "Ops, Desculpa algo aconteceu,\n tente novamente!") ; 
   //     }      
   //   } );    
-  //console.log(" ir para home")
-  SignIn();
+  //console.log(" ir para home") }
+  SignIn(nomeUsuario, senha);
   // navigation.navigate('Registrar')
-
-
  }
 
   const onPressRegister = () => {

@@ -1,36 +1,41 @@
-// // import { UserInfo } from "firebase/auth"
-// import { auth } from "../config/firebase"
-// // usestate e usefect
-// import { onAuthStateChanged } from "firebase/auth";
-// //
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from './database/firebase';
 
-   // const [user, setUser] = useState(null);
-    // const unsubscribe = onAuthStateChanged(auth, (_user) => {
-    //         setUser(_user);
-    //         if (initializing) {
-    //           setInitializing(false);
-    //           setUser(null);
-    //         }
+// Definindo a interface para os parâmetros do login
+interface LoginProps {
+    email: string;
+    password: string;
+}
 
-// definir padrao da resposta so SignIn
+// Definindo o padrão da resposta do SignIn
 interface ResponseProps {
     token: string;
     user: {
-        name: string;
-        email: string;
+        name: string | null;
+        email: string | null;
     }
 }
 
-export default function LogingUser():Promise<ResponseProps> {
-    return new Promise( resolve =>{
-        setTimeout(() => {
-            resolve({
-                token: 'dfsf6sdfsdf6sdfbsdf6sb1fds6bs16fsd16sfdg6sdfgsfffdsrtyeil-0as,dfpsdw478389734',
-                user:{
-                    name: 'Carlos Filho',
-                    email: 'carlos.filho@fatectq.edu.br',
-                }
-            })
-        }, 2000);
-    });
+// Função de login com Firebase Authentication
+export default async function LogingUser(email: string, password: string): Promise<ResponseProps> {
+    try {
+        // Tentando fazer login com o email e senha fornecidos
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        // Aqui, você pode acessar o token de autenticação do usuário
+        const token = await user.getIdToken(); // Obter o token de autenticação
+        
+        // Retornando as informações do usuário autenticado
+        return {
+            token: token,
+            user: {
+                name: user.displayName, // Pode ser null, dependendo do que foi configurado no Firebase
+                email: user.email
+            }
+        };
+    } catch (error: any) {
+        // Capturando e lidando com erros de autenticação
+        console.error("Erro ao fazer login:", error.message);
+        throw new Error(error.message); // Lança o erro para que possa ser tratado externamente
+    }
 }
