@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
-//import {createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../services/database/firebase';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 interface NavigationProps {
@@ -27,32 +25,8 @@ const Registrar = ({navigation}:NavigationProps) => {
        alert("Senha informada estão divergente, \n tente novamente!")
        return
     }
-    //
-    // createUserWithEmailAndPassword( auth, email,  senha, telefone)
-    // .then( (userCredential)=> {
-    //     const user =  userCredential.user;
-    //     //console.log(user)
-    //     //
-    //     navigation.navigate('Login')
-    // } )
-    // .catch( (error)=> {
-    //   const errocode = error.code ;
-    //   const errormsg = error.message ;
-    //   // console.log( errocode );
-    //   // console.log( errormsg );
-    //   switch (errocode) {
-    //     case 'auth/email-already-in-use':
-    //       alert( "Email já esta em utilização !") ; 
-    //       return null
-    //     case 'auth/invalid-email':
-    //       alert( "Email invalido!") ; 
-    //       return null 
-    //     default:
-    //       alert( "falha ao registrar o usuario !") ; 
-    //       return null  
-    //   }    
+   
     navigation.navigate('Home')
-    // } );
      
   }
 

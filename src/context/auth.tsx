@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState} from "react"
-import LogingUser  from "../services/authService";
+import LogingUser, {CreateUser, LogoutUser }  from "../services/authService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface LoginProps {
@@ -10,6 +10,7 @@ interface AuthContextData {
     signed: boolean;
     user: object | null;
     SignIn(email:string, password:string): Promise<void>;
+    CreateAccount(email:string, password:string): Promise<void>;
     SignOut(): void;
   }
   
@@ -39,13 +40,21 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     }
 
     async function SignOut(){
+        const response = await LogoutUser();
+        setUser(response.user);
         await AsyncStorage.setItem("@RNAuth:user", '');
         await AsyncStorage.setItem("@RNAuth:token", '');
-        setUser(null);
     }
 
+    async function CreateAccount(email:string, password:string){
+        const response = await CreateUser( email, password );
+        setUser(response.user);
+        await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response.user))
+        await AsyncStorage.setItem("@RNAuth:token", response.token)
+    }    
+
     return (
-        <AuthContext.Provider value={{signed: !!user, user, SignIn, SignOut}}>
+        <AuthContext.Provider value={{signed: !!user, user, SignIn, SignOut, CreateAccount}}>
             {children}
         </AuthContext.Provider>
     )
