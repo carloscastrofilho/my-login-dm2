@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
-import AuthContext from '../context/auth';
+import {useAuth} from '../context/auth';
 interface NavigationProps {
   navigation:NavigationProp<ParamListBase>;
 }
@@ -9,10 +9,8 @@ interface NavigationProps {
 const PlaceholderImage = require("../component/image/soldado.png");
 
 const Home = ({ navigation }:NavigationProps) => {
-  const { user } = useContext(AuthContext); 
-  // fazer a desestruturação do objeto user
-  const { name, email } = user;
-
+  const { user } = useAuth(); 
+  
   const onLoginClick = () => {
     navigation.navigate("Login");
   };
@@ -25,8 +23,8 @@ const Home = ({ navigation }:NavigationProps) => {
       </View>
 
       <View>
-          <Text> nome: {name}</Text>
-          <Text> email:  {email}</Text> 
+          <Text> nome: {user?.name}</Text>
+          <Text> email:  {user?.email}</Text> 
       <View>
 
       <TouchableOpacity style={styles.botao} onPress={onLoginClick}>

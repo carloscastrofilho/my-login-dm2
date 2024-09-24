@@ -1,14 +1,17 @@
-import { createContext, useEffect, useState} from "react"
-import LogingUser, {CreateUser, LogoutUser }  from "../services/authService";
+import { createContext, useContext, useEffect, useState} from "react"
+import LogingUser, {CreateUser, LoginProps, LogoutUser }  from "../services/authService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import api from "../services/api";
 
-interface LoginProps {
+export interface User {
+    name: string;
     email: string;
-    password: string;
 }
+
 interface AuthContextData {
     signed: boolean;
-    user: object | null;
+    user: User | null;
+    loading : boolean ;
     SignIn(email:string, password:string): Promise<void>;
     CreateAccount(email:string, password:string): Promise<void>;
     SignOut(): void;
@@ -18,21 +21,31 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
   
 // Criando um provedor de contexto
 export const AuthProvider = ({children}: {children: React.ReactNode}) => {  
-    const [ user, setUser ] = useState<object | null>(null);
+    const [ user, setUser ] = useState<User | null>(null);
+    const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
         async function loadStoreageData(){
             const storageUser = await AsyncStorage.getItem("@RNAuth:user");
             const storageToken = await AsyncStorage.getItem("@RNAuth:token");  
+
+            // gera um atrazo de 2s na aplicacção
+            // await new Promise((resolve) => setTimeout(resolve, 2000)) ;
+
             if( storageToken && storageUser){
                 setUser(JSON.parse(storageUser));
+                // insere em todas as requisicoes via api o cabecalho com o token
+                api.defaults.headers['Authorization'] = `Bearer ${storageToken}`;
+                setLoading(false);
             }
         }
     },[])
 
     async function SignIn(email:string, password:string) {
        const response = await LogingUser( email, password );
-        setUser(response.user);
+       setUser(response?.user);
+        // insere em todas as requisicoes via api o cabecalho com o token
+        api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
         await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response.user))
         await AsyncStorage.setItem("@RNAuth:token", response.token)
         
@@ -40,9 +53,9 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
 
     async function SignOut(){
         const response = await LogoutUser();
-        setUser(null);        
-        await AsyncStorage.setItem("@RNAuth:user", '');
-        await AsyncStorage.setItem("@RNAuth:token", '');
+        await AsyncStorage.clear().then( ()=> {
+            setUser(null);
+        });
     }
 
     async function CreateAccount(email:string, password:string){
@@ -54,10 +67,18 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     }    
 
     return (
-        <AuthContext.Provider value={{signed: !!user, user, SignIn, SignOut, CreateAccount}}>
+        <AuthContext.Provider value={{signed: !!user, user, loading, SignIn, SignOut, CreateAccount}}>
             {children}
         </AuthContext.Provider>
     )
 }
 
-export default AuthContext;
+
+// nosso proprio hoock
+export function useAuth(){
+    const context = useContext(AuthContext);
+    return context ;
+}
+
+// export default AuthContext;
+

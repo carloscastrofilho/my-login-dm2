@@ -1,8 +1,9 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from './database/firebase';
+import { User } from "../context/auth";
 
 // Definindo a interface para os parâmetros do login
-interface LoginProps {
+export interface LoginProps {
     email: string;
     password: string;
 }
@@ -10,10 +11,7 @@ interface LoginProps {
 // Definindo o padrão da resposta do SignIn
 interface ResponseProps {
     token: string;
-    user: {
-        name: string | null;
-        email: string | null;
-    }
+    user: User | null ;
 }
 
 // criei para centralizar a criação de um usuario no firebase
@@ -49,7 +47,7 @@ export async function LogoutUser(): Promise<ResponseProps>{
         // Retornando as informações do usuário autenticado
         return {
             token: '',
-            user: {email: null, name: null}
+            user: null,
         };
     } catch (error: any) {
         // Capturando e lidando com erros de autenticação

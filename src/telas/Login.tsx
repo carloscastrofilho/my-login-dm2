@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
-import AuthContext from '../context/auth';
+import {useAuth} from '../context/auth';
 interface NavigationProps {
   navigation:NavigationProp<ParamListBase>;
 }
@@ -12,7 +12,7 @@ const Login = ({ navigation }: NavigationProps ) => {
   const [nomeUsuario, setNomeUsuario] = useState('');
   const [senha, setSenha] = useState('');
 
-  const { SignIn } = useContext(AuthContext); 
+  const { SignIn } = useAuth(); 
 
   const onLoginClick = () => {
     SignIn(nomeUsuario, senha); 

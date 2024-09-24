@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
-import AuthContext from '../context/auth';
+import {useAuth} from '../context/auth';
 
 interface NavigationProps {
   navigation:NavigationProp<ParamListBase>;
@@ -14,7 +14,7 @@ const Registrar = ({navigation}:NavigationProps) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [senha2, setSenha2] = useState('');
-  const { CreateAccount } = useContext(AuthContext)
+  const { CreateAccount } = useAuth();
 
   const onLoginClickRegistro = async () => {
 

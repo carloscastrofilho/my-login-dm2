@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { Entypo, Feather,Ionicons } from '@expo/vector-icons';
-import AuthContext from '../context/auth';
+import {useAuth} from '../context/auth';
 import Registrar from "../telas/Registrar";
 import Home from "../telas/Home";
 
 const Tab = createBottomTabNavigator();
 
 export default function AuthRoutes() {
-    const { SignOut } = useContext(AuthContext);
+    const { SignOut } = useAuth(); 
     
     // O componente Logout agora usa useEffect para chamar SignOut
     const Logout = () => {
