@@ -28,8 +28,8 @@ const Registrar = ({navigation}:NavigationProps) => {
        return
     }
     
-   const response = await CreateAccount(email, senha ) ;
-   console.log(response) ;     
+    const response = await CreateAccount(email, senha ) ;
+    
   }
 
   const onHandleClickLogin = () => {

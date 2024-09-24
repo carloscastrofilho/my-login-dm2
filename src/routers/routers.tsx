@@ -5,13 +5,7 @@ import {useAuth} from '../context/auth'
 import { ActivityIndicator, View } from "react-native";
 
 export default function Routers() {
-  // const {signed, loading } = useContext(AuthContext);
   const {signed, loading } = useAuth(); 
-  // const { SignIn } = useAuth(); 
-  
-  console.log(signed);
-  console.log('rota',loading);
-
   if (loading){
         return (
             <View style={{flex: 1, justifyContent:'center', alignItems: 'center'}}>

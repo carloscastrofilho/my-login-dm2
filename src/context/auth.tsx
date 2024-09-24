@@ -41,6 +41,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
         }
     },[])
 
+    // login de usuario
     async function SignIn(email:string, password:string) {
        const response = await LogingUser( email, password );
        setUser(response?.user);
@@ -51,14 +52,17 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
         
     }
 
+    // deslogando o usuario
     async function SignOut(){
         const response = await LogoutUser();
         await AsyncStorage.clear().then( ()=> {
             setUser(null);
         });
     }
-
+    
+    // cria uma conta no firebase 
     async function CreateAccount(email:string, password:string){
+        
         const response = await CreateUser( email, password );
         setUser(response.user);        
         await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response.user))

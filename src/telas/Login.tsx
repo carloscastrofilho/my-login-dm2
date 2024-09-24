@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import {useAuth} from '../context/auth';
+import { getAllUser, getByIdUser, newUserApp, updateUser } from '../services/realtime';
 interface NavigationProps {
   navigation:NavigationProp<ParamListBase>;
 }
@@ -22,10 +23,34 @@ const Login = ({ navigation }: NavigationProps ) => {
     navigation.navigate('Registrar')
   }
 
+  const onGetAllUser = async ()=>{
+    const lista = getAllUser()
+  
+  }
+  const onNewUser = async () =>{
+      const newuser =  newUserApp()
+  }
+
+  const onGetById = async () =>{
+    const uuid = "-O7ZXIe4AN_r6_3x_MSQ"
+    const newuser =  getByIdUser(uuid);
+}
+
+  const onUpdateUser = async () =>{
+    const uuid = "-O7ZXIe4AN_r6_3x_MSQ"
+    const usuario =  {
+      username: "teste gmail",
+      useremail: "teste@gmail.com",
+      userimageUrl: "",
+      telefone: "16-9999-3444"
+  }
+    const newuser =  updateUser(uuid,usuario);
+  }
+
   return (
     <View style={styles.container}>
             <Image source={PlaceholderImage} style={styles.image} />
-            <Text style={styles.titulo}>Login Aula 17/09/24</Text>
+            <Text style={styles.titulo}>{process.env.EXPO_PUBLIC_AULA}</Text>
       <TextInput
         style={styles.input}
         placeholder="Nome de Usuário"
@@ -53,6 +78,27 @@ const Login = ({ navigation }: NavigationProps ) => {
          onPress={onLoginClick}>
         <Text style={styles.textoBotao}>Entrar</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity style={styles.botao} 
+         onPress={onNewUser}>
+        <Text style={styles.textoBotao}>criar usuario</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.botao} 
+         onPress={onGetAllUser}>
+        <Text style={styles.textoBotao}>consultar usuarios</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.botao} 
+         onPress={onGetById}>
+        <Text style={styles.textoBotao}>Consultar por Id</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.botao} 
+         onPress={onUpdateUser}>
+        <Text style={styles.textoBotao}>Alterar por Id</Text>
+      </TouchableOpacity>
+      
     </View>
 
     
@@ -94,13 +140,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   botao: {
-    backgroundColor: 'orange',
+    backgroundColor: 'blue',
     width: '75%',
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: 5,
   },
   textoBotao: {
     color: '#ffffff',
