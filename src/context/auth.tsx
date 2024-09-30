@@ -64,6 +64,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     async function CreateAccount(email:string, password:string){
         
         const response = await CreateUser( email, password );
+        
         setUser(response.user);        
         await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response.user))
         await AsyncStorage.setItem("@RNAuth:token", response.token)
