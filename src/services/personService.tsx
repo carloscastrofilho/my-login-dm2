@@ -1,27 +1,29 @@
 import { db } from './database/firebase'
 import { set, push, ref, get, update } from "firebase/database";
 
+const schenaName = "person" ;
+
 // novo usuario no banco
-export function newUserApp() {
-    const newDocRed = push(ref(db, "usuarios"))
+export function personNew() {
+    const newDocRed = push(ref(db, schenaName))
     set(newDocRed, {
-        username: "josesilva.gmail",
-        useremail: "josesilva@gmail.com",
-        userimageUrl: "",
+        name: "josesilva.gmail",
+        email: "josesilva@gmail.com",
+        imageurl: "",
         telefone: "16-9999-1111",
         uuid: "2"
     })
         .then(() => {
-            return { success: true, message: "usuario criado com sucesso" }
+            return { success: true, message: "registro criado com sucesso" }
         })
         .catch((error) => {
-            return { success: false, message: `falha ao Incluir o ususario : ${error.message}` }
+            return { success: false, message: `falha ao Incluir o registro : ${error.message}` }
         });
 }
 
-export async function getAllUser() {
+export async function personGetAll() {
     const usersArray = [];
-    const dbref = ref(db, "usuarios");
+    const dbref = ref(db, schenaName );
     const snapshot = await get(dbref);
     if (snapshot.exists()) {
         usersArray.push(...Object.values(snapshot.val())); // Adiciona os usuários ao array
@@ -34,29 +36,26 @@ export async function getAllUser() {
 }
 
 // Consulta usuário por ID - -O7ZXIe4AN_r6_3x_MSQ
-export async function getByIdUser(id: string) {
-    const dbref = ref(db, `usuarios/${id}`);
+export async function personGetById(id: string) {
+    const dbref = ref(db, `${schenaName}/${id}`);
     const snapshot = await get(dbref);
     if (snapshot.exists()) {
         const userData = snapshot.val();
         console.log(userData);
         return userData;
     } else {
-        return { error: "Usuário não encontrado" };
+        return { error: "Registro não encontrado" };
     }
 }
 
 // Atualiza usuário por ID
-export async function updateUser(id: string, updatedData: Partial<{ 
+export async function personUpdate(id: string, updatedData: Partial<{ 
     username: string; useremail: string; userimageUrl: string; telefone: string; }>) {
-    const dbref = ref(db, `usuarios/${id}`);
+    const dbref = ref(db, `${schenaName}}/${id}`);
     try {
         await update(dbref, updatedData);
-        return { success: true, message: "Usuário atualizado com sucesso" };
+        return { success: true, message: "Registro atualizado com sucesso" };
     } catch (error:any) {
-        if ( error ) {
-            return { success: false, message: `Falha ao atualizar o usuário: ${error.message}` };
-        }
-        
+        return { success: false, message: `Falha ao atualizar o registro: ${error.message}` };
     }
 }

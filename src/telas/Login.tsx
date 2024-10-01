@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView} from 'react-native';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import {useAuth} from '../context/auth';
 import { getAllUser, getByIdUser, newUserApp, updateUser } from '../services/realtime';
@@ -7,7 +7,7 @@ interface NavigationProps {
   navigation:NavigationProp<ParamListBase>;
 }
 
-const PlaceholderImage = require('../component/image/usuario.png');
+const PlaceholderImage = require('../../assets/agenda.png');
 
 const Login = ({ navigation }: NavigationProps ) => {
   const [nomeUsuario, setNomeUsuario] = useState('');
@@ -49,8 +49,15 @@ const Login = ({ navigation }: NavigationProps ) => {
 
   return (
     <View style={styles.container}>
-            <Image source={PlaceholderImage} style={styles.image} />
-            <Text style={styles.titulo}>{process.env.EXPO_PUBLIC_AULA}</Text>
+      <ScrollView style={styles.scroll}>
+              
+      <View style={styles.contentLogo }>
+          <Image source={PlaceholderImage} style={styles.image} />
+          <Text style={styles.titulo}>{process.env.EXPO_PUBLIC_AULA}</Text>
+      </View>
+
+      <View style={styles.content}>
+
       <TextInput
         style={styles.input}
         placeholder="Nome de Usuário"
@@ -78,47 +85,44 @@ const Login = ({ navigation }: NavigationProps ) => {
          onPress={onLoginClick}>
         <Text style={styles.textoBotao}>Entrar</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.botao} 
-         onPress={onNewUser}>
-        <Text style={styles.textoBotao}>criar usuario</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.botao} 
-         onPress={onGetAllUser}>
-        <Text style={styles.textoBotao}>consultar usuarios</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.botao} 
-         onPress={onGetById}>
-        <Text style={styles.textoBotao}>Consultar por Id</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.botao} 
-         onPress={onUpdateUser}>
-        <Text style={styles.textoBotao}>Alterar por Id</Text>
-      </TouchableOpacity>
+      </View>
       
-    </View>
-
+      </ScrollView>
+  </View>
+   
     
   );
 };
 
 const styles = StyleSheet.create({
+  
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffffff',
     gap:10,
+    marginTop:25,
+  },
+  scroll: {
+    flex: 1,
+    marginTop: 45,
+    width: "100%",
+    padding: 15,
+  },
+
+  contentLogo : {
+    flex: 1,
+    width: "auto",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   image: {
     width:'80%',
     height:100,
-    resizeMode:"contain",
-  
+    resizeMode:"contain",  
   },
+  
   titulo: {
     fontSize: 40,
     fontWeight: 'bold',
@@ -130,6 +134,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'red'
   },
+  content:{
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    gap:10,
+    marginTop: 30,
+  },
+
   input: {
     width: '80%',
     height: 60,
@@ -139,6 +152,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
+
   botao: {
     backgroundColor: 'blue',
     width: '75%',
@@ -148,6 +162,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 5,
   },
+
   textoBotao: {
     color: '#ffffff',
     fontSize: 16,

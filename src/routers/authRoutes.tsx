@@ -18,6 +18,7 @@ export default function AuthRoutes() {
 
     return (
         <Tab.Navigator screenOptions={{
+            headerShown: false,
             tabBarStyle: {
                 backgroundColor: '#000',
                 borderTopColor: "transparent",
