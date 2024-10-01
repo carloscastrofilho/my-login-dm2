@@ -44,7 +44,9 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     // login de usuario
     async function SignIn(email:string, password:string) {
        const response = await LogingUser( email, password );
-       setUser(response?.user);
+       if ( response) {
+           setUser(response);
+       }
         // insere em todas as requisicoes via api o cabecalho com o token
         api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
         await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response.user))

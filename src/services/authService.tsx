@@ -6,6 +6,7 @@ import { User } from "../context/auth";
 export interface LoginProps {
     email: string;
     password: string;
+    uuid: string;
 }
 
 // Definindo o padrão da resposta do SignIn
@@ -27,8 +28,9 @@ export async function CreateUser(email: string, password: string): Promise<Respo
         return {
             token: token,
             user: {
-                name: user.displayName, // Pode ser null, dependendo do que foi configurado no Firebase
-                email: user.email
+                name: user.displayName, 
+                email: user.email,
+                uuid: user.uid,
             }
         };
     } catch (error: any) {
@@ -60,17 +62,19 @@ export async function LogoutUser(): Promise<ResponseProps>{
 export default async function LogingUser(email: string, password: string): Promise<ResponseProps> {
     try {
         // Tentando fazer login com o email e senha fornecidos
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);        
         const user = userCredential.user;
+        
         // Aqui, você pode acessar o token de autenticação do usuário
         const token = await user.getIdToken(); // Obter o token de autenticação
-        
+        console.log( user?.uid);
         // Retornando as informações do usuário autenticado
         return {
             token: token,
             user: {
                 name: user.displayName, // Pode ser null, dependendo do que foi configurado no Firebase
-                email: user.email
+                email: user.email,
+                uuid: user.uid,
             }
         };
     } catch (error: any) {

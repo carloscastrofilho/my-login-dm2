@@ -15,8 +15,8 @@ const Login = ({ navigation }: NavigationProps ) => {
 
   const { SignIn } = useAuth(); 
 
-  const onLoginClick = () => {
-    SignIn(nomeUsuario, senha); 
+  const onLoginClick = async () => {
+   await SignIn(nomeUsuario, senha);     
  }
 
   const onPressRegister = () => {
@@ -100,10 +100,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: "#c1bdf4",
     gap:10,
-    marginTop:25,
+    marginTop: 36,
   },
+
   scroll: {
     flex: 1,
     marginTop: 45,
@@ -117,14 +118,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   image: {
-    width:'80%',
-    height:100,
-    resizeMode:"contain",  
+    width: 160,
+    height: 160,
+    resizeMode:"contain",
+    marginBottom: 20,
   },
   
   titulo: {
-    fontSize: 40,
+    fontSize: 36,
     fontWeight: 'bold',
     marginBottom: 20,
   },
@@ -134,6 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'red'
   },
+
   content:{
     flex: 1,
     width: "100%",
@@ -144,22 +148,22 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    width: '80%',
+    width: '85%',
     height: 60,
     borderWidth: 1,
-    borderColor: '#cccccc',
+    borderColor: '#071d10',
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 10,
   },
 
   botao: {
-    backgroundColor: 'blue',
+    backgroundColor: '#021d0c',
     width: '75%',
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 16,
     marginTop: 5,
   },
 
