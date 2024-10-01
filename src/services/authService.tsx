@@ -19,6 +19,7 @@ export async function CreateUser(email: string, password: string): Promise<Respo
     try {
         // Tentando fazer login com o email e senha fornecidos
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        
         const user = userCredential.user;
         // Aqui, você pode acessar o token de autenticação do usuário
         const token = await user.getIdToken(); // Obter o token de autenticação
@@ -61,6 +62,8 @@ export default async function LogingUser(email: string, password: string): Promi
     try {
         // Tentando fazer login com o email e senha fornecidos
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log("login: ",userCredential);
+
         const user = userCredential.user;
         // Aqui, você pode acessar o token de autenticação do usuário
         const token = await user.getIdToken(); // Obter o token de autenticação
