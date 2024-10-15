@@ -28,10 +28,8 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
         async function loadStoreageData(){
             const storageUser = await AsyncStorage.getItem("@RNAuth:user");
             const storageToken = await AsyncStorage.getItem("@RNAuth:token");  
-
             // gera um atrazo de 2s na aplicacção
             // await new Promise((resolve) => setTimeout(resolve, 2000)) ;
-
             if( storageToken && storageUser){
                 setUser(JSON.parse(storageUser));
                 // insere em todas as requisicoes via api o cabecalho com o token
@@ -50,8 +48,7 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
         // insere em todas as requisicoes via api o cabecalho com o token
         api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
         await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response.user))
-        await AsyncStorage.setItem("@RNAuth:token", response.token)
-        
+        await AsyncStorage.setItem("@RNAuth:token", response.token)        
     }
 
     // deslogando o usuario
@@ -63,10 +60,8 @@ export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     }
     
     // cria uma conta no firebase 
-    async function CreateAccount(email:string, password:string){
-        
-        const response = await CreateUser( email, password );
-        
+    async function CreateAccount(email:string, password:string){        
+        const response = await CreateUser( email, password );        
         setUser(response.user);        
         await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response.user))
         await AsyncStorage.setItem("@RNAuth:token", response.token)

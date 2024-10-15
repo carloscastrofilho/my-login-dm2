@@ -95,12 +95,11 @@ const Login = ({ navigation }: NavigationProps ) => {
 };
 
 const styles = StyleSheet.create({
-  
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "#c1bdf4",
+    backgroundColor: "#fff",
     gap:10,
     marginTop: 36,
   },

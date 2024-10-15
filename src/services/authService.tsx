@@ -19,8 +19,7 @@ interface ResponseProps {
 export async function CreateUser(email: string, password: string): Promise<ResponseProps> {
     try {
         // Tentando fazer login com o email e senha fornecidos
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);        
         const user = userCredential.user;
         // Aqui, você pode acessar o token de autenticação do usuário
         const token = await user.getIdToken(); // Obter o token de autenticação
@@ -43,8 +42,7 @@ export async function CreateUser(email: string, password: string): Promise<Respo
 
 // criei 11/09 - para centrar a saida do usuario logado
 export async function LogoutUser(): Promise<ResponseProps>{
-    try {
-                
+    try {                
         const user = await signOut(auth);
         // Aqui, você pode acessar o token de autenticação do usuário                
         // Retornando as informações do usuário autenticado
@@ -64,10 +62,8 @@ export default async function LogingUser(email: string, password: string): Promi
     try {
         // Tentando fazer login com o email e senha fornecidos
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        console.log("login: ",userCredential);
-
-        const user = userCredential.user;
-        
+        // console.log("login: ",userCredential);
+        const user = userCredential.user;        
         // Aqui, você pode acessar o token de autenticação do usuário
         const token = await user.getIdToken(); // Obter o token de autenticação
         console.log( user?.uid);
