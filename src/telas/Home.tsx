@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from "react-native";
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useAuth } from '../context/auth';
+import { usePerson } from "../context/person";
 interface NavigationProps {
   navigation: NavigationProp<ParamListBase>;
 }
@@ -9,7 +10,9 @@ interface NavigationProps {
 const logo = require("../../assets/agenda.png");
 
 const Home = ({ navigation }: NavigationProps) => {
+  
   const { user } = useAuth();
+  const { person } = usePerson();
 
   const onLoginClick = () => {
     // navigation.navigate("Login");
@@ -20,7 +23,7 @@ const Home = ({ navigation }: NavigationProps) => {
       <View style={styles.header}>
           <Image source={logo} style={styles.image} />
           <Text style={styles.titulo}>Principal</Text>
-          <Text> email:  {user?.email}</Text>
+          <Text> email:  {person?.email}</Text>
       </View>
 
       <ScrollView style={styles.scroll}>

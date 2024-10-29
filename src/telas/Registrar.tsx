@@ -29,7 +29,7 @@ const Registrar = ({ navigation }: NavigationProps) => {
       return
     }
 
-    const response = await CreateAccount(email, senha);
+    const response = await CreateAccount(email, senha, telefone, nomeUsuario);
 
   }
 
@@ -157,12 +157,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   botao: {
-    backgroundColor: 'blue',
+    backgroundColor: '#021d0c',
     width: '75%',
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 16,
     marginTop: 15,
     marginBottom: 30,
   },

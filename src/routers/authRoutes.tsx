@@ -24,25 +24,28 @@ export default function AuthRoutes() {
                 borderTopColor: "transparent",
             },
             tabBarActiveTintColor: '#fff'           
-        }
+            }}
+            >
             
-         }>
             <Tab.Screen name="Home" 
                 component={Home}
                 options={{ tabBarLabel: 'início',
                          tabBarIcon: ({ color, size }) => (
                           <Entypo name="home" color={color} size={size} />
                          )
-                    }}/>
+            }}/>
+
             <Tab.Screen name="Registro" 
                 component={Registrar}
             />
 
-            <Tab.Screen name="Sair" component={ Logout }
+            <Tab.Screen name="Sair" 
+                component={ Logout }
                 options={{ tabBarLabel: 'início',
                     tabBarIcon: ({ color, size }) => (
                     <Ionicons name="exit" color={color} size={size} /> )
-                }}/>
+            }}/>
+
         </Tab.Navigator>
       );
   };

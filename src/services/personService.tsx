@@ -1,20 +1,21 @@
 import { db } from './database/firebase'
 import { set, push, ref, get, update } from "firebase/database";
+import {Person } from "../context/person"
 
 const schenaName = "person" ;
 
 // novo usuario no banco
-export function personNew() {
+export async function personNew(personData: Person) {
     const newDocRed = push(ref(db, schenaName))
-    set(newDocRed, {
-        name: "josesilva.gmail",
-        email: "josesilva@gmail.com",
-        imageurl: "",
-        telefone: "16-9999-1111",
-        uuid: "2"
+    const data = await set(newDocRed, {
+        name: personData.name,
+        email: personData.email,
+        imageurl: personData.avatar,
+        telefone: personData.telefone,
+        uuidauth: personData.uuidauth
     })
-        .then(() => {
-            return { success: true, message: "registro criado com sucesso" }
+        .then((data) => {
+            return { data }
         })
         .catch((error) => {
             return { success: false, message: `falha ao Incluir o registro : ${error.message}` }
@@ -45,6 +46,26 @@ export async function personGetById(id: string) {
         return userData;
     } else {
         return { error: "Registro não encontrado" };
+    }
+}
+
+// Consulta usuário por uuidauth
+export async function personGetByIdAuth(uuidauth: string) {
+    const dbref = ref(db, `${schenaName}`);
+    const snapshot = await get(dbref);
+    if (snapshot.exists()) {
+        const data = snapshot.val();
+        // Percorre os registros para encontrar o uuidauth correspondente
+        const person = Object.values(data)
+            .find((person: any) => person.uuidauth === uuidauth);
+        if (person) {
+            console.log(person);
+            return person;
+        } else {
+            return { error: "Registro não encontrado" };
+        }
+    } else {
+        return { error: "Nenhum registro encontrado" };
     }
 }
 
