@@ -23,7 +23,7 @@ const Home = ({ navigation }: NavigationProps) => {
       <View style={styles.header}>
           <Image source={logo} style={styles.image} />
           <Text style={styles.titulo}>Principal</Text>
-          <Text> email:  {person?.email}</Text>
+          <Text> email:  {person?.telefone}</Text>
       </View>
 
       <ScrollView style={styles.scroll}>

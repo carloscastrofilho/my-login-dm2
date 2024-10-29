@@ -50,8 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setUser(response);
             // 
             const uuid : string = response?.user?.uuid ;
-            const pessoa = await PersonGetUuidAuth(uuid);
-            
+            const pessoa = await PersonGetUuidAuth(uuid);            
 
             // insere em todas as requisicoes via api o cabecalho com o token
             api.defaults.headers['Authorization'] = `Bearer ${response.token}`;
