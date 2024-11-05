@@ -4,6 +4,7 @@ import { Entypo, Feather,Ionicons } from '@expo/vector-icons';
 import {useAuth} from '../context/auth';
 import Registrar from "../telas/Registrar";
 import Home from "../telas/Home";
+import Agenda from '../telas/Agenda';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,6 +38,10 @@ export default function AuthRoutes() {
 
             <Tab.Screen name="Registro" 
                 component={Registrar}
+            />
+
+            <Tab.Screen name="Agenda" 
+                component={Agenda}
             />
 
             <Tab.Screen name="Sair" 

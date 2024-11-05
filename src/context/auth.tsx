@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import LogingUser, { CreateUser, LoginProps, LogoutUser } from "../services/authService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import api from "../services/api";
-import { PersonContext } from "./person"
+import { PersonContext , Person } from "./person"
 
 export interface User {
     name: string;
@@ -74,10 +74,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (response) {
             setUser(response.user);
             const dataPerson : Person = {
-                name: response?.user?.name,
+                name: name,
                 email: response?.user?.email,
                 uuidauth: response?.user?.uuid,
                 telefone: telefone,
+                avatar: ""
             }
             const pessoa = await PersonCreate(dataPerson);
             console.log( "context-auth: ", pessoa );

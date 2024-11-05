@@ -6,20 +6,21 @@ const schenaName = "person" ;
 
 // novo usuario no banco
 export async function personNew(personData: Person) {
-    const newDocRed = push(ref(db, schenaName))
-    const data = await set(newDocRed, {
-        name: personData.name,
-        email: personData.email,
-        imageurl: personData.avatar,
-        telefone: personData.telefone,
-        uuidauth: personData.uuidauth
-    })
-        .then((data) => {
-            return { data }
-        })
-        .catch((error) => {
-            return { success: false, message: `falha ao Incluir o registro : ${error.message}` }
-        });
+    const newDocRef = push(ref(db, schenaName))
+    try {
+            await set(newDocRef, {
+                name: personData.name,
+                email: personData.email,
+                uuidauth: personData.uuidauth,
+                telefone: personData.telefone,        
+                imageurl: personData.avatar
+            });
+    
+            return { data: { id: newDocRef.key, ...personData } }; 
+        
+    } catch (error) {
+        return { success: false, message: `falha ao Incluir o registro : ${error.message}` }
+    }            
 }
 
 export async function personGetAll() {

@@ -25,16 +25,24 @@ export const PersonProvider = ({children}: {children: React.ReactNode}) => {
 
     async function PersonGetUuidAuth( uuid: string){        
         const dataPerson = await personGetByIdAuth(uuid);
-        if (dataPerson){-
+        if (dataPerson){
             setPerson(dataPerson);
-            console.log("context/person-getId",dataPerson ) ;
             return dataPerson;
-        }
-        
+        }        
     }
+    
     async function PersonCreate(dataPerson: Person){
         const personData = await personNew(dataPerson);
-        return null;
+        const response : Person = {
+            name: personData.data?.name,
+            email: personData.data?.email,
+            telefone: personData.data?.telefone,
+            avatar: personData.data?.imageurl,
+            uuidauth: personData.data?.uuidauth,
+            observacao: ""
+        }            
+        setPerson(response);        
+        return response;
     }
 
      // 3. executa no SignOut do usario e contexts\auth.ts

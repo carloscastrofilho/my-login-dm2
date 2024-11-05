@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from "rea
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useAuth } from '../context/auth';
 import { usePerson } from "../context/person";
+
 interface NavigationProps {
   navigation: NavigationProp<ParamListBase>;
 }
@@ -27,89 +28,6 @@ const Home = ({ navigation }: NavigationProps) => {
       </View>
 
       <ScrollView style={styles.scroll}>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
-
-        <View>
-                 
-          <Text> nome: {user?.name}</Text>
-          <Text> email:  {user?.email}</Text>   
-        </View>
 
         <View>
                  
