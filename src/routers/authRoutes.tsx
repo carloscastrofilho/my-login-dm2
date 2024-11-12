@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { Entypo, Feather,Ionicons } from '@expo/vector-icons';
+import { Entypo, Feather, AntDesign, Ionicons } from '@expo/vector-icons';
 import {useAuth} from '../context/auth';
 import Registrar from "../telas/Registrar";
 import Home from "../telas/Home";
 import Agenda from '../telas/Agenda';
+import AgendaNew from '../telas/AgendaNew';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,10 +22,16 @@ export default function AuthRoutes() {
         <Tab.Navigator screenOptions={{
             headerShown: false,
             tabBarStyle: {
-                backgroundColor: '#000',
+                elevation: 10,
+                backgroundColor: '#971b18',
                 borderTopColor: "transparent",
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
+                height: 57,
+                paddingBottom: 5,
+                paddingTop:5,
             },
-            tabBarActiveTintColor: '#fff'           
+            tabBarActiveTintColor: '#fff'        
             }}
             >
             
@@ -34,14 +41,25 @@ export default function AuthRoutes() {
                          tabBarIcon: ({ color, size }) => (
                           <Entypo name="home" color={color} size={size} />
                          )
-            }}/>
+            }}
+            />
 
-            <Tab.Screen name="Registro" 
-                component={Registrar}
+            <Tab.Screen name="agendaNew" 
+                component={AgendaNew}
+                options={{ tabBarLabel: 'registrar',
+                    tabBarIcon: ({ color, size }) => (
+                     <AntDesign name="addfile" color={color} size={size} />
+                    )
+            }}
             />
 
             <Tab.Screen name="Agenda" 
                 component={Agenda}
+                options={{ tabBarLabel: 'agenda',
+                    tabBarIcon: ({ color, size }) => (
+                     <Entypo name="calendar" color={color} size={size} />
+                    )
+            }}
             />
 
             <Tab.Screen name="Sair" 
@@ -49,7 +67,8 @@ export default function AuthRoutes() {
                 options={{ tabBarLabel: 'início',
                     tabBarIcon: ({ color, size }) => (
                     <Ionicons name="exit" color={color} size={size} /> )
-            }}/>
+            }}
+            />
 
         </Tab.Navigator>
       );

@@ -25,7 +25,7 @@ export async function getAllUser() {
     const snapshot = await get(dbref);
     if (snapshot.exists()) {
         usersArray.push(...Object.values(snapshot.val())); // Adiciona os usuários ao array
-        console.log(usersArray);
+        //console.log(usersArray);
         const jsonResponse = JSON.stringify(usersArray); // Converte para JSON
         return jsonResponse;
     } else {
@@ -39,7 +39,7 @@ export async function getByIdUser(id: string) {
     const snapshot = await get(dbref);
     if (snapshot.exists()) {
         const userData = snapshot.val();
-        console.log(userData);
+        //console.log(userData);
         return userData;
     } else {
         return { error: "Usuário não encontrado" };

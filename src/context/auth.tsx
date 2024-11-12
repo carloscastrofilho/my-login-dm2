@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 avatar: ""
             }
             const pessoa = await PersonCreate(dataPerson);
-            console.log( "context-auth: ", pessoa );
+            //console.log( "context-auth: ", pessoa );
             await AsyncStorage.setItem("@RNAuth:user", JSON.stringify(response.user))
             await AsyncStorage.setItem("@RNAuth:token", response.token)
         }

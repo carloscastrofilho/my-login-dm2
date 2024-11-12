@@ -29,7 +29,7 @@ export async function personGetAll() {
     const snapshot = await get(dbref);
     if (snapshot.exists()) {
         usersArray.push(...Object.values(snapshot.val())); // Adiciona os usuários ao array
-        console.log(usersArray);
+        //console.log(usersArray);
         const jsonResponse = JSON.stringify(usersArray); // Converte para JSON
         return jsonResponse;
     } else {
@@ -43,7 +43,7 @@ export async function personGetById(id: string) {
     const snapshot = await get(dbref);
     if (snapshot.exists()) {
         const userData = snapshot.val();
-        console.log(userData);
+        //console.log(userData);
         return userData;
     } else {
         return { error: "Registro não encontrado" };
@@ -60,7 +60,7 @@ export async function personGetByIdAuth(uuidauth: string) {
         const person = Object.values(data)
             .find((person: any) => person.uuidauth === uuidauth);
         if (person) {
-            console.log(person);
+            //console.log(person);
             return person;
         } else {
             return { error: "Registro não encontrado" };

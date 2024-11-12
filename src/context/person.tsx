@@ -48,7 +48,7 @@ export const PersonProvider = ({children}: {children: React.ReactNode}) => {
      // 3. executa no SignOut do usario e contexts\auth.ts
      async function PersonClean(){
         setPerson(null);
-        console.log("context/person: " , person);
+        //console.log("context/person: " , person);
         return null;
      }    
 
