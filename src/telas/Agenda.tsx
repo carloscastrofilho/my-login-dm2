@@ -1,10 +1,11 @@
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
-
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { Foundation, AntDesign } from "@expo/vector-icons"
 import { db } from "../services/database/firebase";
 import { onValue, ref } from "firebase/database";
 import { Person } from '../context/person';
+import { personDelete, personUpdate } from '../services/personService';
 
 interface NavigationProps {
   navigation: NavigationProp<ParamListBase>;
@@ -33,21 +34,50 @@ const Agenda = ({ navigation }: NavigationProps) => {
     return () => unsubscribe(); // Limpa o listener ao desmontar o componente
   }, []);
 
+  const onPressDelete = async (id: string) => {
+    // console.log("delete pressionado", id);
+    await personDelete(id);
+  }
+
+  const onPressUpdate = async (id:string, contato:Person) => {
+    // const dataContato : Person = {
+    //   name: "alterando registro",
+    //   email: "teste@gmail.com",
+    //   avatar: "",
+    //   observacao: "",
+    //   telefone: contato.telefone,
+    //   uuidauth: contato.uuidauth,
+    // }
+    // await personUpdate(id, dataContato );
+    navigation.navigate('agendaUpdate', {contato});
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Agenda de Contatos</Text>
+      
       <ScrollView>
-
         <View>
+
           {lista.map((contato, index) => (
             <View key={contato.id} style={styles.userItem}>
               <Text style={styles.userText}>{contato.id || '-'}</Text>
               <Text style={styles.userText}>{contato.name || '-'}</Text>
               <Text style={styles.userText}>{contato.telefone || '-'}</Text>
               <Text style={styles.userText}>{contato.email || '-'}</Text>
+
+              <TouchableOpacity onPress={ () => onPressDelete(contato.id) }>
+                 <AntDesign name="delete" size={24} color={"red"} />
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => onPressUpdate(contato.id,contato)}>
+                 <Foundation name="clipboard-pencil" size={24} color={"blue"} />
+              </TouchableOpacity>
+
             </View>
           ))}
         </View>
+
       </ScrollView>
     </View>
   );
@@ -58,6 +88,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: "#fff",
+    marginTop: 40,
   },
   title: {
     fontSize: 20,

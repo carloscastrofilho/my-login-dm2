@@ -1,17 +1,18 @@
 import React, { useContext, useEffect } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { Entypo, Feather, AntDesign, Ionicons } from '@expo/vector-icons';
+import { Entypo, Ionicons } from '@expo/vector-icons';
 import {useAuth} from '../context/auth';
-import Registrar from "../telas/Registrar";
 import Home from "../telas/Home";
-import Agenda from '../telas/Agenda';
-import AgendaNew from '../telas/AgendaNew';
+// import Registrar from "../telas/Registrar";
+// import Agenda from '../telas/Agenda';
+// import AgendaNew from '../telas/AgendaNew';
+// import AgendaUpdate from '../telas/AgendaUpdate';
+import AgendaRoutes from './agendaRoutes';
 
 const Tab = createBottomTabNavigator();
 
 export default function AuthRoutes() {
-    const { SignOut } = useAuth(); 
-    
+    const { SignOut } = useAuth();     
     // O componente Logout agora usa useEffect para chamar SignOut
     const Logout = () => {
         SignOut();         
@@ -43,7 +44,7 @@ export default function AuthRoutes() {
                          )
             }}
             />
-
+{/* 
             <Tab.Screen name="agendaNew" 
                 component={AgendaNew}
                 options={{ tabBarLabel: 'registrar',
@@ -53,8 +54,17 @@ export default function AuthRoutes() {
             }}
             />
 
-            <Tab.Screen name="Agenda" 
-                component={Agenda}
+            <Tab.Screen name="agendaUpdate" 
+                component={AgendaUpdate}
+                options={{ tabBarLabel: 'Update',
+                    tabBarIcon: ({ color, size }) => (
+                     <AntDesign name="addfile" color={color} size={size} />
+                    )
+            }}
+            /> */}
+
+            <Tab.Screen name="AgendaRoutes" 
+                component={AgendaRoutes}
                 options={{ tabBarLabel: 'agenda',
                     tabBarIcon: ({ color, size }) => (
                      <Entypo name="calendar" color={color} size={size} />

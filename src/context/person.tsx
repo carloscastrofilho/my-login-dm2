@@ -5,10 +5,11 @@ import { personNew, personGetByIdAuth } from "../services/personService"
 export interface Person {
     name: string;
     email: string;
-    uuidauth: string;
-    telefone: string;
+    uuidauth?: string;
+    telefone?: string;
     observacao?: string;
     avatar?:string;
+    id?:string;
 }
 
 interface PersonContextData {

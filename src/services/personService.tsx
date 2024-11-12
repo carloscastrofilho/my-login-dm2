@@ -1,5 +1,5 @@
 import { db } from './database/firebase'
-import { set, push, ref, get, update } from "firebase/database";
+import { set, push, ref, get, update, remove } from "firebase/database";
 import {Person } from "../context/person"
 
 const schenaName = "person" ;
@@ -71,13 +71,24 @@ export async function personGetByIdAuth(uuidauth: string) {
 }
 
 // Atualiza usuário por ID
-export async function personUpdate(id: string, updatedData: Partial<{ 
-    username: string; useremail: string; userimageUrl: string; telefone: string; }>) {
-    const dbref = ref(db, `${schenaName}}/${id}`);
+export async function personUpdate(id: string, updatedData: Person) {
+    const dbref = ref(db, `${schenaName}/${id}`);
     try {
         await update(dbref, updatedData);
         return { success: true, message: "Registro atualizado com sucesso" };
     } catch (error:any) {
         return { success: false, message: `Falha ao atualizar o registro: ${error.message}` };
+    }
+}
+
+export async function personDelete(id: string ) {
+    console.log(id);
+    const dbref = ref(db, `${schenaName}/${id}`);
+
+    try {
+        await remove(dbref);
+        return { success: true, message: "Registro deletado com sucesso" };
+    } catch (error:any) {
+        return { success: false, message: `Falha ao deletar um registro: ${error.message}` };
     }
 }
